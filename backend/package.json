@@ -1,0 +1,32 @@
+{
+  "name": "beers-ecommerce-backend",
+  "version": "1.0.0",
+  "description": "Backend API for beers ecommerce",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "start": "node index.js",
+    "seed": "node seed.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.1.5",
+    "multer": "^1.4.5-lts.1",
+    "qrcode": "^1.5.4",
+    "stripe": "^16.2.0",
+    "speakeasy": "^2.0.0",
+    "xss": "^1.0.14",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "supertest": "^6.3.4"
+  }
+}
