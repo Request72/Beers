@@ -1,4 +1,4 @@
-// Security summary (student note): auth calls rely on secure cookies and server checks,
+// Security summary : auth calls rely on secure cookies and server checks,
 // so the frontend only sends credentials and never stores tokens locally.
 import { axiosInstance } from '@/lib/axios';
 
