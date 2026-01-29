@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login, verifyMfa } from '@/lib/authApi';
+import { login, verifyMfa, rememberUserId } from '@/lib/authApi';
 import { PasswordStrength } from '@/components/auth/PasswordStrength';
 import Link from 'next/link';
 
@@ -35,6 +35,7 @@ export default function LoginPage() {
         setStep('mfa');
         return;
       }
+      rememberUserId(data?.user?.id);
       router.push('/beers');
     } catch (err: any) {
       const status = err?.response?.status;
@@ -58,7 +59,8 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
     try {
-      await verifyMfa(mfaCode);
+      const data = await verifyMfa(mfaCode);
+      rememberUserId(data?.user?.id);
       router.push('/beers');
     } catch (err: any) {
       const status = err?.response?.status;

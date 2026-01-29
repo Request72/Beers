@@ -1,4 +1,4 @@
-// Security summary (student note): auth calls rely on secure cookies and server checks,
+// Security summary : auth calls rely on secure cookies and server checks,
 // so the frontend only sends credentials and never stores tokens locally.
 import { axiosInstance } from '@/lib/axios';
 
@@ -19,12 +19,30 @@ export async function verifyMfa(code: string) {
 
 export async function logout() {
   const response = await axiosInstance.post('/api/auth/logout');
+  clearRememberedUserId();
   return response.data;
 }
 
 export async function fetchMe() {
   const response = await axiosInstance.get('/api/auth/me');
   return response.data;
+}
+
+const USER_ID_KEY = 'user_id';
+
+export function rememberUserId(userId?: string) {
+  if (!userId || typeof window === 'undefined') return;
+  window.localStorage.setItem(USER_ID_KEY, userId);
+}
+
+export function getRememberedUserId() {
+  if (typeof window === 'undefined') return null;
+  return window.localStorage.getItem(USER_ID_KEY);
+}
+
+export function clearRememberedUserId() {
+  if (typeof window === 'undefined') return;
+  window.localStorage.removeItem(USER_ID_KEY);
 }
 
 export async function fetchProfile() {
