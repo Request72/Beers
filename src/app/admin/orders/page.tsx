@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '@/lib/axios';
+import { getRememberedUserId } from '@/lib/authApi';
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
+    setUserId(getRememberedUserId());
     axiosInstance
       .get('/api/admin/orders')
       .then((response) => setOrders(response.data.orders))
@@ -26,6 +29,9 @@ export default function AdminOrdersPage() {
         <div className="mx-auto max-w-4xl rounded-3xl border border-black/10 bg-white p-8 shadow-soft">
           <h1 className="text-3xl font-semibold text-ink-900">Admin Orders</h1>
           <p className="mt-2 text-sm text-ink-500">Review all customer orders.</p>
+          {userId && (
+            <p className="mt-2 text-xs text-ink-400">Current user ID: {userId}</p>
+          )}
 
           {error && <p className="mt-4 text-sm text-rose-600">{error}</p>}
 
