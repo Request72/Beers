@@ -34,6 +34,14 @@ export default function OrdersPage() {
                   </div>
                   <p className="mt-2 text-ink-600">Status: {order.status}</p>
                   <p className="text-ink-600">Total: ${order.subtotal.toFixed(2)}</p>
+                  <div className="mt-3 space-y-1 text-ink-600">
+                    {order.items?.map((item: any) => (
+                      <div key={item.beerId} className="flex items-center justify-between text-xs">
+                        <span>{item.name} × {item.quantity}</span>
+                        <span>${item.lineTotal.toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))
             )}
